@@ -555,7 +555,7 @@
 
 <!-- Main Workspace -->
 
-<div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+<div class="flex-1 flex flex-col lg:flex-row overflow-x-hidden">
 
 <!-- Left Editor Panel -->
 <div id="leftEditorPanel" class="w-full lg:w-1/2 flex flex-col border-r border-slate-700 bg-slate-900/90 no-print">
@@ -714,7 +714,7 @@
                     <img id="profileImgDisplay" class="w-full h-full object-cover hidden">
                 </div>
                 <div class="flex-1">
-                    <input type="file" id="profileImageInput" accept="image/*" onchange="openImageCropModal(event)" class="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-650 file:text-white hover:file:bg-indigo-500 cursor-pointer">
+                    <input type="file" id="profileImageInput" accept="image/*" onchange="openImageCropModal(event)" class="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer">
                     <div class="flex items-center gap-4 mt-2">
                         <label class="text-xs text-slate-400"><input type="radio" name="photoShape" value="circle" checked onchange="triggerUpdate()"> Circle</label>
                         <label class="text-xs text-slate-400"><input type="radio" name="photoShape" value="square" onchange="triggerUpdate()"> Square</label>
@@ -859,45 +859,48 @@
 </div>
 
 <!-- Right Live Preview Panel -->
-<div id="rightPreviewPanel" class="w-full lg:w-1/2 bg-slate-950 flex flex-col items-center justify-start p-6 overflow-y-auto">
+<div id="rightPreviewPanel" class="w-full lg:w-1/2 bg-slate-950 flex flex-col items-center justify-start p-4 sm:p-6 overflow-y-auto overflow-x-auto">
     <div class="w-full max-w-3xl flex flex-wrap justify-between items-center gap-2 mb-4 no-print">
         <div class="flex items-center gap-2 text-xs text-slate-400">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Live Preview (<span id="activeTemplateNameLabel">ATS Classic Single</span>) • <span class="text-indigo-400 font-medium">Click text on preview to edit directly</span>
+            Live Preview (<span id="activeTemplateNameLabel">ATS Classic Single</span>)
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-3">
             <label class="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer select-none">
                 <input type="checkbox" id="togglePageBreakCheck" checked onchange="renderPageBreakIndicators()" class="rounded text-indigo-600">
                 <span>Page Breaks</span>
             </label>
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center gap-1">
                 <span class="text-xs text-slate-400">Zoom:</span>
-                <button onclick="setZoom(0.75)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs">75%</button>
-                <button onclick="setZoom(0.9)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs">90%</button>
-                <button onclick="setZoom(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs">100%</button>
+                <button onclick="setZoom(0.25)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-200">25%</button>
+                <button onclick="setZoom(0.5)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-200">50%</button>
+                <button onclick="setZoom(0.75)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-200">75%</button>
+                <button onclick="setZoom(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-200">100%</button>
             </div>
         </div>
     </div>
 
-    <!-- Preview Sheet Container -->
-    <div id="previewSheetWrapper" class="relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden page-a4" style="transform: scale(0.9); transform-origin: top center;">
-        <div id="pageBreakOverlay"></div>
-        <div id="printable-cv" class="p-10 w-full h-full flex flex-col">
-            <!-- Rendered CV Content injected via JS -->
+    <!-- Preview Sheet Container with Mobile Overflow Fix -->
+    <div class="w-full flex justify-center overflow-x-auto py-2">
+        <div id="previewSheetWrapper" class="relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden page-a4 shrink-0" style="transform: scale(0.5); transform-origin: top center;">
+            <div id="pageBreakOverlay"></div>
+            <div id="printable-cv" class="p-10 w-full h-full flex flex-col">
+                <!-- Rendered CV Content injected via JS -->
+            </div>
         </div>
     </div>
 </div>
 </div>
 
-<!-- Manual Free HD Image Crop Modal -->
+<!-- Manual HD Image Crop Modal -->
 
 <div id="imageCropModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative space-y-4">
         <div class="flex justify-between items-center">
-            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-crop text-indigo-400 mr-2"></i> Free Crop & Position Image</h3>
+            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-crop text-indigo-400 mr-2"></i> Manual Free Photo Crop & Adjust</h3>
             <button onclick="closeImageCropModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
-        <p class="text-xs text-slate-400">ছবিটি মাউস দিয়ে টেনে যেকোনো জায়গায় সরাতে পারেন অথবা নিচের স্লাইডার দিয়ে জুম ও রিসাইজ করে আপনার ইচ্ছামতো নিখুঁত ক্রপ করতে পারেন।</p>
+        <p class="text-xs text-slate-400">Drag image freely with your mouse/finger or adjust zoom slider to crop any part of your picture.</p>
 
     <div class="flex justify-center bg-slate-900 p-4 rounded-xl border border-slate-700 overflow-hidden relative" style="height: 280px;">
         <canvas id="cropCanvas" class="cursor-grab active:cursor-grabbing max-h-full max-w-full object-contain" width="300" height="300"></canvas>
@@ -1068,6 +1071,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         try {
+            // Check if opened via Public Share URL (?share=...)
             const urlParams = new URLSearchParams(window.location.search);
             const sharedPayload = urlParams.get('share');
             if (sharedPayload) {
@@ -1093,6 +1097,12 @@
             }
 
 
+            // Auto set initial zoom for mobile view nicely
+            if (window.innerWidth < 768) {
+                setZoom(0.5);
+            }
+
+
             renderCategories();
             syncInputsToDOM();
             updatePageSizeSelection();
@@ -1103,6 +1113,7 @@
             initSlidingAuthUI();
 
 
+            // Initialize Firebase Auth Listener & Auth Guard
             setTimeout(() => {
                 if (window.firebaseAuth) {
                     window.firebaseMethods.onAuthStateChanged(window.firebaseAuth, async (user) => {
@@ -1137,6 +1148,7 @@
     });
 
 
+    // --- Sliding Auth UI Toggle Logic ---
     function initSlidingAuthUI() {
         const containerBox = document.getElementById('authContainerBox');
         const registerToggleBtn = document.getElementById('registerToggleBtn');
@@ -1170,6 +1182,7 @@
     }
 
 
+    // --- Firebase Auth Handlers ---
     async function handleFirebaseLogin() {
         const email = document.getElementById('modalAuthEmail')?.value;
         const password = document.getElementById('modalAuthPassword')?.value;
@@ -1318,7 +1331,7 @@
     }
 
 
-    // --- Manual Free Image Cropper & Positioner Logic ---
+    // --- Manual Free HD Image Cropper Logic ---
     function openImageCropModal(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -1379,20 +1392,25 @@
         }
 
 
-        const drawW = cropSourceImage.width * zoom;
-        const drawH = cropSourceImage.height * zoom;
+        const baseSize = Math.min(cropSourceImage.width, cropSourceImage.height);
+        const drawW = baseSize * zoom;
+        const drawH = baseSize * zoom;
         const drawX = (canvas.width - drawW) / 2 + cropOffsetX;
         const drawY = (canvas.height - drawH) / 2 + cropOffsetY;
 
 
-        ctx.drawImage(cropSourceImage, drawX, drawY, drawW, drawH);
+        const sx = (cropSourceImage.width - baseSize) / 2;
+        const sy = (cropSourceImage.height - baseSize) / 2;
+
+
+        ctx.drawImage(cropSourceImage, sx, sy, baseSize, baseSize, drawX, drawY, drawW, drawH);
 
 
         ctx.filter = 'none';
-        ctx.strokeStyle = 'rgba(79, 70, 229, 0.9)';
+        ctx.strokeStyle = 'rgba(79, 70, 229, 0.8)';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, 110, 0, Math.PI * 2);
+        ctx.arc(canvas.width / 2, canvas.height / 2, 120, 0, Math.PI * 2);
         ctx.stroke();
     }
 
@@ -1461,13 +1479,18 @@
         else if (filter === 'grayscale') hdCtx.filter = 'grayscale(100%) contrast(1.1)';
 
 
-        const drawW = cropSourceImage.width * zoom * 2;
-        const drawH = cropSourceImage.height * zoom * 2;
+        const baseSize = Math.min(cropSourceImage.width, cropSourceImage.height);
+        const drawW = baseSize * zoom * 2;
+        const drawH = baseSize * zoom * 2;
         const drawX = (hdCanvas.width - drawW) / 2 + (cropOffsetX * 2);
         const drawY = (hdCanvas.height - drawH) / 2 + (cropOffsetY * 2);
 
 
-        hdCtx.drawImage(cropSourceImage, drawX, drawY, drawW, drawH);
+        const sx = (cropSourceImage.width - baseSize) / 2;
+        const sy = (cropSourceImage.height - baseSize) / 2;
+
+
+        hdCtx.drawImage(cropSourceImage, sx, sy, baseSize, baseSize, drawX, drawY, drawW, drawH);
 
 
         cvData.profileImage = hdCanvas.toDataURL('image/jpeg', 0.95);
@@ -1578,7 +1601,7 @@
     function applyPageSizeClass() {
         const wrapper = document.getElementById('previewSheetWrapper');
         if(!wrapper) return;
-        wrapper.className = "relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden";
+        wrapper.className = "relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden shrink-0";
         if (cvData.pageSize === 'letter') wrapper.classList.add('page-letter');
         else if (cvData.pageSize === 'legal') wrapper.classList.add('page-legal');
         else if (cvData.pageSize === 'a5') wrapper.classList.add('page-a5');
@@ -1720,6 +1743,7 @@
     }
 
 
+    // --- Drag & Drop Section Order Logic ---
     function renderSectionOrderList() {
         const container = document.getElementById('sectionOrderList');
         if (!container) return;
@@ -1786,6 +1810,7 @@
     }
 
 
+    // --- Page Break Visual Indicator ---
     function renderPageBreakIndicators() {
         const overlay = document.getElementById('pageBreakOverlay');
         const wrapper = document.getElementById('previewSheetWrapper');
@@ -1819,6 +1844,7 @@
     }
 
 
+    // --- Date Parsing & Duration Calculation Helpers ---
     function escapeAttr(str) {
         return String(str || '').replace(/"/g, '&quot;');
     }
@@ -2732,6 +2758,7 @@ function renderPreview() {
     setTimeout(renderPageBreakIndicators, 50);
 }
 
+// --- Auto Cover Letter Generator, Download & Print ---
 function generateAutoCoverLetter(forceReset = false) {
     const companyInput = document.getElementById('clCompanyName');
     const managerInput = document.getElementById('clManagerName');
@@ -2821,6 +2848,7 @@ function downloadCoverLetterDOC() {
     triggerFileDownload(blob, `${nameSlug}_Cover_Letter_${companySlug}.doc`);
 }
 
+// --- ATS Job Description Matching Analyzer ---
 function openAtsMatcherModal() {
     document.getElementById('atsMatcherModal')?.classList.remove('hidden');
 }
@@ -2862,6 +2890,7 @@ function analyzeJobMatch() {
         : '<span class="text-emerald-400">All key terms matched!</span>';
 }
 
+// --- Public Sharing Link ---
 function openShareLinkModal() {
     const sharePayload = { ...cvData, profileImage: '' };
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(sharePayload))));
@@ -2913,6 +2942,15 @@ function loadSampleData() {
                 endDate: 'Present',
                 showDurationCalc: true,
                 desc: '• Managed microservices migration and led a team of <b>5 engineers</b>.\n• Reduced API latency by <mark>35%</mark> using Redis caching.'
+            },
+            {
+                title: 'Software Engineer',
+                company: 'DevCraft Studio',
+                location: 'Sylhet, Bangladesh',
+                startDate: '01 Jun 2018',
+                endDate: '31 Jan 2021',
+                showDurationCalc: true,
+                desc: '1. Built high-performance frontend components.\n2. Integrated REST APIs and automated CI/CD pipelines.'
             }
         ],
         projects: [
