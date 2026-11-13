@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProCV Studio - Ultimate Professional CV & Resume Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Noto+Sans+Bengali:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Boxicons for modern sliding login UI -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Firebase SDKs & Custom Config -->
     <script type="module">
@@ -97,6 +99,316 @@
         .exp-formatted-desc ol { list-style-type: decimal; padding-left: 1.25rem; margin: 0.2rem 0; }
         .exp-formatted-desc li { margin-bottom: 0.15rem; }
         .exp-formatted-desc mark { background-color: #fef08a; color: #0f172a; padding: 0 3px; border-radius: 2px; }
+
+        /* --- Modern Sliding Auth Modal Specific Styles --- */
+        .auth-wrapper-box {
+            position: relative;
+            width: 850px;
+            height: 540px;
+            background: #1e1e2f;
+            margin: 20px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-form-box {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 40px;
+            transition: 0.6s ease-in-out;
+            z-index: 10;
+        }
+
+        .auth-form-box.login {
+            left: 0;
+        }
+
+        .auth-wrapper-box.active .auth-form-box.login {
+            left: 50%;
+            transform: translateX(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .auth-form-box.register {
+            left: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .auth-wrapper-box.active .auth-form-box.register {
+            left: 50%;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .auth-form-box form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .auth-form-box h2 {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .auth-input-box {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .auth-input-box input {
+            width: 100%;
+            height: 48px;
+            background: #2a2a40;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: #fff;
+            padding: 0 45px 0 20px;
+            border-radius: 12px;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .auth-input-box input:focus {
+            background: #33334d;
+            box-shadow: 0 0 8px rgba(142, 68, 173, 0.6);
+        }
+
+        .auth-input-box input::placeholder {
+            color: #8c8cbe;
+        }
+
+        .auth-input-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #8c8cbe;
+        }
+
+        .auth-forgot-link {
+            align-self: flex-end;
+            margin: 5px 0 15px;
+        }
+
+        .auth-forgot-link a, .auth-switch-text a {
+            color: #b19cd9;
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .auth-forgot-link a:hover, .auth-switch-text a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border: none;
+            outline: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .auth-btn:hover {
+            background: linear-gradient(135deg, #9b59b6, #af7ac5);
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .auth-social-text {
+            font-size: 13px;
+            color: #8c8cbe;
+            margin: 15px 0 10px;
+        }
+
+        .auth-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .auth-social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: #2a2a40;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .auth-social-icons a:hover {
+            background: #8e44ad;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(142, 68, 173, 0.5);
+        }
+
+        .auth-switch-text {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #8c8cbe;
+        }
+
+        /* Sliding Toggle Panel */
+        .auth-toggle-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: 0.6s ease-in-out;
+            z-index: 100;
+            border-radius: 150px 0 0 150px;
+        }
+
+        .auth-wrapper-box.active .auth-toggle-container {
+            left: 0;
+            border-radius: 0 150px 150px 0;
+        }
+
+        .auth-toggle {
+            position: relative;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(135deg, #512da8, #8e44ad);
+            color: #fff;
+            transform: translateX(0);
+            transition: 0.6s ease-in-out;
+        }
+
+        .auth-wrapper-box.active .auth-toggle {
+            transform: translateX(50%);
+        }
+
+        .auth-toggle-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            transform: translateX(0);
+            transition: 0.6s ease-in-out;
+        }
+
+        .auth-toggle-left {
+            transform: translateX(-200%);
+        }
+
+        .auth-wrapper-box.active .auth-toggle-left {
+            transform: translateX(0);
+        }
+
+        .auth-toggle-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .auth-wrapper-box.active .auth-toggle-right {
+            transform: translateX(200%);
+        }
+
+        .auth-toggle-panel h1 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .auth-toggle-panel p {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 25px;
+            color: #e0d4f7;
+        }
+
+        .auth-toggle-btn {
+            width: 160px;
+            height: 45px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-toggle-btn:hover {
+            background: #fff;
+            color: #8e44ad;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .auth-wrapper-box {
+                width: 100%;
+                height: 600px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+            .auth-toggle-container {
+                display: none;
+            }
+            .auth-form-box {
+                width: 100%;
+                padding: 0 25px;
+            }
+            .auth-form-box.register {
+                left: 0;
+                opacity: 0;
+                pointer-events: none;
+            }
+            .auth-wrapper-box.active .auth-form-box.login {
+                left: 0;
+                transform: none;
+                opacity: 0;
+                pointer-events: none;
+            }
+            .auth-wrapper-box.active .auth-form-box.register {
+                left: 0;
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
@@ -112,38 +424,93 @@
     </div>
 </div>
 
-<!-- Authentication Guard Modal (Mandatory Login Before Entry) -->
+<!-- Authentication Guard Modal (Mandatory Login Before Entry with New Sliding Design) -->
 <div id="authGuardModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
-        <div class="text-center mb-6">
-            <div class="inline-block bg-indigo-600 text-white p-3 rounded-2xl font-bold text-2xl shadow-lg mb-2">
-                <i class="fa-solid fa-file-lines"></i>
-            </div>
-            <h2 id="authGuardTitle" class="text-xl font-bold text-white">Welcome to ProCV Studio</h2>
-            <p id="authGuardSub" class="text-xs text-slate-400 mt-1">Please login or create an account to access your professional CV builder and secure cloud sync.</p>
+    <div class="auth-wrapper-box" id="authContainerBox">
+        
+        <!-- Login Form -->
+        <div class="auth-form-box login">
+            <form id="modalLoginForm" onsubmit="event.preventDefault(); handleFirebaseLogin();">
+                <h2>Sign In</h2>
+                <div class="auth-input-box">
+                    <input type="email" id="modalAuthEmail" placeholder="Email Address" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="auth-input-box">
+                    <input type="password" id="modalAuthPassword" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="flex justify-between items-center w-full text-xs mb-3">
+                    <div id="modalAuthError" class="text-rose-400 hidden"></div>
+                    <button type="button" onclick="sendModalPasswordReset()" id="modalForgotBtn" class="text-indigo-400 hover:underline ml-auto bg-transparent border-none cursor-pointer">Forgot Password?</button>
+                </div>
+                <button type="submit" id="modalAuthSubmitBtn" class="auth-btn">Login</button>
+                
+                <p class="auth-social-text">Or sign in with social platforms</p>
+                <div class="auth-social-icons">
+                    <a href="#" title="Google"><i class='bx bxl-google'></i></a>
+                    <a href="#" title="GitHub"><i class='bx bxl-github'></i></a>
+                    <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                </div>
+
+                <div class="auth-switch-text md:hidden">
+                    Don't have an account? <a href="#" id="mobileToggleReg">Register</a>
+                </div>
+            </form>
         </div>
 
-        <div class="space-y-4">
-            <div>
-                <label class="text-xs text-slate-400 block mb-1">Email Address</label>
-                <input type="email" id="modalAuthEmail" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="e.g. user@example.com">
-            </div>
-            <div>
-                <label class="text-xs text-slate-400 block mb-1">Password</label>
-                <input type="password" id="modalAuthPassword" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="********">
-            </div>
-            <div class="flex justify-between items-center text-xs">
-                <div id="modalAuthError" class="text-rose-400 hidden"></div>
-                <button type="button" onclick="sendModalPasswordReset()" id="modalForgotBtn" class="text-indigo-400 hover:underline ml-auto">Forgot Password?</button>
-            </div>
-            <button onclick="handleModalAuthSubmit()" id="modalAuthSubmitBtn" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition shadow-lg shadow-indigo-600/30">Login to Continue</button>
-            
-            <div class="text-center pt-2 border-t border-slate-700/60">
-                <p id="authSwitchText" class="text-xs text-slate-400">
-                    Don't have an account? <button type="button" onclick="toggleAuthMode()" class="text-indigo-400 font-semibold hover:underline">Create Account</button>
-                </p>
+        <!-- Register Form -->
+        <div class="auth-form-box register">
+            <form id="modalRegisterForm" onsubmit="event.preventDefault(); handleFirebaseRegister();">
+                <h2>Create Account</h2>
+                <div class="auth-input-box">
+                    <input type="text" id="modalRegName" placeholder="Full Name" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="auth-input-box">
+                    <input type="email" id="modalRegEmail" placeholder="Email Address" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="auth-input-box">
+                    <input type="password" id="modalRegPassword" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" id="modalRegSubmitBtn" class="auth-btn">Register</button>
+                
+                <p class="auth-social-text">Or register with social platforms</p>
+                <div class="auth-social-icons">
+                    <a href="#" title="Google"><i class='bx bxl-google'></i></a>
+                    <a href="#" title="GitHub"><i class='bx bxl-github'></i></a>
+                    <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                </div>
+
+                <div class="auth-switch-text md:hidden">
+                    Already have an account? <a href="#" id="mobileToggleLog">Sign In</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sliding Toggle Panel -->
+        <div class="auth-toggle-container">
+            <div class="auth-toggle">
+                
+                <div class="auth-toggle-panel auth-toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="auth-toggle-btn" id="loginToggleBtn">Sign In</button>
+                </div>
+
+                <div class="auth-toggle-panel auth-toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button class="auth-toggle-btn" id="registerToggleBtn">Register</button>
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
 
@@ -647,7 +1014,6 @@
 
 <script>
     let currentUser = null;
-    let authMode = 'login';
     let autoSaveTimer = null;
     let cropSourceImage = null;
     let cropOffsetX = 0;
@@ -770,6 +1136,7 @@
             triggerUpdate();
             generateAutoCoverLetter();
             initCropCanvasListeners();
+            initSlidingAuthUI();
 
             // Initialize Firebase Auth Listener & Auth Guard
             setTimeout(() => {
@@ -804,34 +1171,40 @@
         }
     });
 
-    function exitPublicShareMode() {
-        window.location.href = window.location.pathname;
-    }
+    // --- Sliding Auth UI Toggle Logic ---
+    function initSlidingAuthUI() {
+        const containerBox = document.getElementById('authContainerBox');
+        const registerToggleBtn = document.getElementById('registerToggleBtn');
+        const loginToggleBtn = document.getElementById('loginToggleBtn');
+        const mobileToggleReg = document.getElementById('mobileToggleReg');
+        const mobileToggleLog = document.getElementById('mobileToggleLog');
 
-    function toggleAuthMode() {
-        authMode = authMode === 'login' ? 'signup' : 'login';
-        const titleEl = document.getElementById('authGuardTitle');
-        const subEl = document.getElementById('authGuardSub');
-        const btnEl = document.getElementById('modalAuthSubmitBtn');
-        const forgotBtn = document.getElementById('modalForgotBtn');
-        const switchText = document.getElementById('authSwitchText');
-
-        if (authMode === 'signup') {
-            if(titleEl) titleEl.innerText = "Create Your ProCV Account";
-            if(subEl) subEl.innerText = "Sign up to start saving and syncing your professional CV securely.";
-            if(btnEl) btnEl.innerText = "Create Account";
-            if(forgotBtn) forgotBtn.classList.add('hidden');
-            if(switchText) switchText.innerHTML = `Already have an account? <button type="button" onclick="toggleAuthMode()" class="text-indigo-400 font-semibold hover:underline">Login</button>`;
-        } else {
-            if(titleEl) titleEl.innerText = "Welcome to ProCV Studio";
-            if(subEl) subEl.innerText = "Please login or create an account to access your professional CV builder and secure cloud sync.";
-            if(btnEl) btnEl.innerText = "Login to Continue";
-            if(forgotBtn) forgotBtn.classList.remove('hidden');
-            if(switchText) switchText.innerHTML = `Don't have an account? <button type="button" onclick="toggleAuthMode()" class="text-indigo-400 font-semibold hover:underline">Create Account</button>`;
+        if (registerToggleBtn && containerBox) {
+            registerToggleBtn.addEventListener('click', () => {
+                containerBox.classList.add('active');
+            });
+        }
+        if (loginToggleBtn && containerBox) {
+            loginToggleBtn.addEventListener('click', () => {
+                containerBox.classList.remove('active');
+            });
+        }
+        if (mobileToggleReg && containerBox) {
+            mobileToggleReg.addEventListener('click', (e) => {
+                e.preventDefault();
+                containerBox.classList.add('active');
+            });
+        }
+        if (mobileToggleLog && containerBox) {
+            mobileToggleLog.addEventListener('click', (e) => {
+                e.preventDefault();
+                containerBox.classList.remove('active');
+            });
         }
     }
 
-    async function handleModalAuthSubmit() {
+    // --- Firebase Auth Handlers ---
+    async function handleFirebaseLogin() {
         const email = document.getElementById('modalAuthEmail')?.value;
         const password = document.getElementById('modalAuthPassword')?.value;
         const errEl = document.getElementById('modalAuthError');
@@ -842,13 +1215,31 @@
                 alert('Firebase is not initialized properly.');
                 return;
             }
-            if (authMode === 'login') {
-                await window.firebaseMethods.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+            await window.firebaseMethods.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+        } catch (err) {
+            if(errEl) {
+                errEl.innerText = err.message;
+                errEl.classList.remove('hidden');
             } else {
-                await window.firebaseMethods.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
-                cvData = getBlankCVData();
-                await saveToCloud();
+                alert(err.message);
             }
+        }
+    }
+
+    async function handleFirebaseRegister() {
+        const email = document.getElementById('modalRegEmail')?.value;
+        const password = document.getElementById('modalRegPassword')?.value;
+        const errEl = document.getElementById('modalAuthError');
+        if(errEl) errEl.classList.add('hidden');
+
+        try {
+            if (!window.firebaseAuth) {
+                alert('Firebase is not initialized properly.');
+                return;
+            }
+            await window.firebaseMethods.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+            cvData = getBlankCVData();
+            await saveToCloud();
         } catch (err) {
             if(errEl) {
                 errEl.innerText = err.message;
@@ -941,6 +1332,10 @@
         } catch (err) {
             console.error("Cloud load error:", err);
         }
+    }
+
+    function exitPublicShareMode() {
+        window.location.href = window.location.pathname;
     }
 
     // --- Manual HD Image Cropper Logic ---
@@ -1376,13 +1771,12 @@
         overlay.innerHTML = '';
         if (toggle && !toggle.checked) return;
 
-        // Standard pixel heights at 96 DPI for 1 page
         const pageHeightsPx = {
-            a4: 1122.5,     // 297mm
-            letter: 1056,   // 11in
-            legal: 1344,    // 14in
-            a5: 793.7,      // 210mm
-            b5: 944.8       // 250mm
+            a4: 1122.5,
+            letter: 1056,
+            legal: 1344,
+            a5: 793.7,
+            b5: 944.8
         };
         const singlePageH = pageHeightsPx[cvData.pageSize] || 1122.5;
         const totalH = wrapper.scrollHeight;
@@ -1821,7 +2215,6 @@
         if(tip) tip.innerText = score >= 80 ? "Great job! Your resume has key ATS sections." : "Add more experience and skills to boost ATS score.";
     }
 
-    // Helper to build ordered sections dynamically
     function buildOrderedSections(titleRenderer, skillsRenderer) {
         const order = (cvData.sectionOrder && cvData.sectionOrder.length) ? cvData.sectionOrder : DEFAULT_SECTION_ORDER;
 
@@ -1883,7 +2276,6 @@
         const labelEl = document.getElementById('activeTemplateNameLabel');
         if(!printable) return;
 
-        // Apply Font Size Scale & Line Spacing
         printable.style.setProperty('--cv-scale', cvData.fontSizeScale || '1');
         printable.style.setProperty('--cv-leading', cvData.lineSpacing || '1.5');
 
@@ -1950,7 +2342,6 @@
 
         let sub = cvData.subTemplate;
 
-        // 1. ATS Templates (Unchanged)
         if (sub === 'ats-classic') {
             const orderedBody = buildOrderedSections(
                 t => `<h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1.5" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">${t}</h3>`,
@@ -2005,9 +2396,7 @@
                 </div>
                 <div class="space-y-4 border-t pt-4 border-slate-300">${orderedBody}${declHtml}</div>
             `;
-        }
-        // 2. Official & Govt Templates (Unchanged)
-        else if (sub === 'off-table') {
+        } else if (sub === 'off-table') {
             printable.className = `${marginCls} w-full h-full flex flex-col ${fontClass}`;
             printable.innerHTML = `
                 <div class="border-2 p-4 mb-4 flex items-center gap-4" style="border-color: ${cvData.primaryColor}">
@@ -2068,9 +2457,7 @@
                     ${customHtml}${declHtml}
                 </div>
             `;
-        }
-        // 3. Modern Sidebar Templates (Unchanged)
-        else if (sub.startsWith('mod')) {
+        } else if (sub.startsWith('mod')) {
             let isRight = sub === 'mod-right';
             let isSplit = sub === 'mod-split';
             printable.className = `${marginCls} w-full h-full flex flex-col ${fontClass}`;
@@ -2104,9 +2491,7 @@
                     </div>
                 </div>
             `;
-        }
-        // 4. FIXED: Corporate Pro (3 Distinct Sub-Templates)
-        else if (sub === 'corp-standard') {
+        } else if (sub === 'corp-standard') {
             const orderedBody = buildOrderedSections(
                 t => `<h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1.5" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">${t}</h3>`,
                 () => `<div class="flex flex-wrap gap-1">${skillsHtml}</div>`
@@ -2171,9 +2556,7 @@
                 </div>
                 <div class="space-y-4">${orderedBody}${declHtml}</div>
             `;
-        }
-        // 5. FIXED: Creative Tech (3 Distinct Sub-Templates)
-        else if (sub === 'tech-developer') {
+        } else if (sub === 'tech-developer') {
             const orderedBody = buildOrderedSections(
                 t => `<h3 class="text-xs font-bold uppercase tracking-wider font-mono mb-1.5" style="color: ${cvData.primaryColor}">// ${t}</h3>`,
                 () => `<div class="flex flex-wrap gap-1.5 font-mono">${cvData.skills.split(',').map(s => `<span class="bg-slate-900 text-emerald-400 px-2 py-0.5 rounded text-[11px]">&lt;${s.trim()} /&gt;</span>`).join('')}</div>`
@@ -2242,9 +2625,7 @@
                 </div>
                 ${declHtml}
             `;
-        }
-        // 6. FIXED: Minimalist (3 Distinct Sub-Templates)
-        else if (sub === 'min-clean') {
+        } else if (sub === 'min-clean') {
             const orderedBody = buildOrderedSections(
                 t => `<h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 border-b border-slate-200 pb-1 mb-2">${t}</h3>`,
                 () => `<p class="text-xs text-slate-700 leading-relaxed">${cvData.skills.split(',').map(s => s.trim()).filter(Boolean).join('  •  ')}</p>`
@@ -2277,7 +2658,6 @@
                 <div class="space-y-4">${orderedBody}${declHtml}</div>
             `;
         } else {
-            // min-compact
             const orderedBody = buildOrderedSections(
                 t => `<h3 class="text-[11px] font-bold uppercase tracking-wider mb-1" style="color: ${cvData.primaryColor}">${t}</h3>`,
                 () => `<p class="text-xs text-slate-700">${cvData.skills}</p>`
@@ -2300,7 +2680,6 @@
             `;
         }
 
-        // Update visual page breaks after DOM renders
         setTimeout(renderPageBreakIndicators, 50);
     }
 
@@ -2438,7 +2817,7 @@
 
     // --- Public Sharing Link ---
     function openShareLinkModal() {
-        const sharePayload = { ...cvData, profileImage: '' }; // Exclude heavy base64 image from URL length
+        const sharePayload = { ...cvData, profileImage: '' };
         const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(sharePayload))));
         const shareUrl = `${window.location.origin}${window.location.pathname}?share=${encoded}`;
         const input = document.getElementById('generatedShareUrl');
