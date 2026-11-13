@@ -555,7 +555,7 @@
 
 <!-- Main Workspace -->
 
-<div class="flex-1 flex flex-col lg:flex-row overflow-x-hidden">
+<div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
 
 <!-- Left Editor Panel -->
 <div id="leftEditorPanel" class="w-full lg:w-1/2 flex flex-col border-r border-slate-700 bg-slate-900/90 no-print">
@@ -707,7 +707,7 @@
 
         <!-- 2. Personal & Photo Tab -->
         <div id="content-personal" class="space-y-4 editor-content hidden">
-            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Profile Photo (Manual Free HD Crop & Position)</h3>
+            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Profile Photo (Full Photo Free Custom Crop)</h3>
             <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/80 flex items-center gap-4">
                 <div id="photoPreviewContainer" class="w-16 h-16 rounded-full bg-slate-700 overflow-hidden flex items-center justify-center border-2 border-indigo-500 shrink-0">
                     <i class="fa-solid fa-user text-slate-400 text-2xl" id="photoPlaceholderIcon"></i>
@@ -892,15 +892,15 @@
 </div>
 </div>
 
-<!-- Manual HD Image Crop Modal -->
+<!-- Manual Full Photo Custom Crop Modal -->
 
 <div id="imageCropModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative space-y-4">
         <div class="flex justify-between items-center">
-            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-crop text-indigo-400 mr-2"></i> Manual Free Photo Crop & Adjust</h3>
+            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-crop text-indigo-400 mr-2"></i> Full Photo Custom Adjust & Crop</h3>
             <button onclick="closeImageCropModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
-        <p class="text-xs text-slate-400">Drag image freely with your mouse/finger or adjust zoom slider to crop any part of your picture.</p>
+        <p class="text-xs text-slate-400">আপনার পুরো ছবিটি দেখা যাচ্ছে। মাউস দিয়ে ড্র্যাগ করে পজিশন করুন অথবা জুম করে আপনার ইচ্ছেমতো ক্রপ করুন।</p>
 
     <div class="flex justify-center bg-slate-900 p-4 rounded-xl border border-slate-700 overflow-hidden relative" style="height: 280px;">
         <canvas id="cropCanvas" class="cursor-grab active:cursor-grabbing max-h-full max-w-full object-contain" width="300" height="300"></canvas>
@@ -908,8 +908,8 @@
 
     <div class="grid grid-cols-2 gap-4 bg-slate-900/50 p-3 rounded-xl border border-slate-700/60">
         <div>
-            <label class="text-[11px] text-slate-400 block mb-1">Zoom / Free Scale</label>
-            <input type="range" id="cropZoomRange" min="0.2" max="4" step="0.05" value="1" oninput="redrawCropCanvas()" class="w-full accent-indigo-500 cursor-pointer">
+            <label class="text-[11px] text-slate-400 block mb-1">Zoom / Scale</label>
+            <input type="range" id="cropZoomRange" min="0.2" max="3" step="0.05" value="1" oninput="redrawCropCanvas()" class="w-full accent-indigo-500 cursor-pointer">
         </div>
         <div>
             <label class="text-[11px] text-slate-400 block mb-1">HD Quality Filter</label>
@@ -923,7 +923,7 @@
 
     <div class="flex justify-end gap-3 pt-2">
         <button onclick="closeImageCropModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold rounded-lg transition">Cancel</button>
-        <button onclick="confirmImageCrop()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition shadow-lg shadow-indigo-600/30"><i class="fa-solid fa-check mr-1.5"></i> Apply Crop Photo</button>
+        <button onclick="confirmImageCrop()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition shadow-lg shadow-indigo-600/30"><i class="fa-solid fa-check mr-1.5"></i> Apply Custom Crop</button>
     </div>
 </div>
 </div>
@@ -1071,7 +1071,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         try {
-            // Check if opened via Public Share URL (?share=...)
             const urlParams = new URLSearchParams(window.location.search);
             const sharedPayload = urlParams.get('share');
             if (sharedPayload) {
@@ -1097,12 +1096,6 @@
             }
 
 
-            // Auto set initial zoom for mobile view nicely
-            if (window.innerWidth < 768) {
-                setZoom(0.5);
-            }
-
-
             renderCategories();
             syncInputsToDOM();
             updatePageSizeSelection();
@@ -1113,7 +1106,6 @@
             initSlidingAuthUI();
 
 
-            // Initialize Firebase Auth Listener & Auth Guard
             setTimeout(() => {
                 if (window.firebaseAuth) {
                     window.firebaseMethods.onAuthStateChanged(window.firebaseAuth, async (user) => {
@@ -1148,7 +1140,6 @@
     });
 
 
-    // --- Sliding Auth UI Toggle Logic ---
     function initSlidingAuthUI() {
         const containerBox = document.getElementById('authContainerBox');
         const registerToggleBtn = document.getElementById('registerToggleBtn');
@@ -1158,31 +1149,20 @@
 
 
         if (registerToggleBtn && containerBox) {
-            registerToggleBtn.addEventListener('click', () => {
-                containerBox.classList.add('active');
-            });
+            registerToggleBtn.addEventListener('click', () => { containerBox.classList.add('active'); });
         }
         if (loginToggleBtn && containerBox) {
-            loginToggleBtn.addEventListener('click', () => {
-                containerBox.classList.remove('active');
-            });
+            loginToggleBtn.addEventListener('click', () => { containerBox.classList.remove('active'); });
         }
         if (mobileToggleReg && containerBox) {
-            mobileToggleReg.addEventListener('click', (e) => {
-                e.preventDefault();
-                containerBox.classList.add('active');
-            });
+            mobileToggleReg.addEventListener('click', (e) => { e.preventDefault(); containerBox.classList.add('active'); });
         }
         if (mobileToggleLog && containerBox) {
-            mobileToggleLog.addEventListener('click', (e) => {
-                e.preventDefault();
-                containerBox.classList.remove('active');
-            });
+            mobileToggleLog.addEventListener('click', (e) => { e.preventDefault(); containerBox.classList.remove('active'); });
         }
     }
 
 
-    // --- Firebase Auth Handlers ---
     async function handleFirebaseLogin() {
         const email = document.getElementById('modalAuthEmail')?.value;
         const password = document.getElementById('modalAuthPassword')?.value;
@@ -1191,18 +1171,11 @@
 
 
         try {
-            if (!window.firebaseAuth) {
-                alert('Firebase is not initialized properly.');
-                return;
-            }
+            if (!window.firebaseAuth) { alert('Firebase not initialized.'); return; }
             await window.firebaseMethods.signInWithEmailAndPassword(window.firebaseAuth, email, password);
         } catch (err) {
-            if(errEl) {
-                errEl.innerText = err.message;
-                errEl.classList.remove('hidden');
-            } else {
-                alert(err.message);
-            }
+            if(errEl) { errEl.innerText = err.message; errEl.classList.remove('hidden'); }
+            else { alert(err.message); }
         }
     }
 
@@ -1215,20 +1188,13 @@
 
 
         try {
-            if (!window.firebaseAuth) {
-                alert('Firebase is not initialized properly.');
-                return;
-            }
+            if (!window.firebaseAuth) { alert('Firebase not initialized.'); return; }
             await window.firebaseMethods.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
             cvData = getBlankCVData();
             await saveToCloud();
         } catch (err) {
-            if(errEl) {
-                errEl.innerText = err.message;
-                errEl.classList.remove('hidden');
-            } else {
-                alert(err.message);
-            }
+            if(errEl) { errEl.innerText = err.message; errEl.classList.remove('hidden'); }
+            else { alert(err.message); }
         }
     }
 
@@ -1237,29 +1203,17 @@
         const email = document.getElementById('modalAuthEmail')?.value;
         const errEl = document.getElementById('modalAuthError');
         if(errEl) errEl.classList.add('hidden');
-
-
         if (!email) {
-            if(errEl) {
-                errEl.innerText = "Please enter your email address first.";
-                errEl.classList.remove('hidden');
-            } else {
-                alert("Please enter your email address first.");
-            }
+            if(errEl) { errEl.innerText = "Please enter your email address first."; errEl.classList.remove('hidden'); }
+            else { alert("Please enter your email address first."); }
             return;
         }
-
-
         try {
             await window.firebaseMethods.sendPasswordResetEmail(window.firebaseAuth, email);
             alert("Password reset email sent! Please check your inbox.");
         } catch (err) {
-            if(errEl) {
-                errEl.innerText = err.message;
-                errEl.classList.remove('hidden');
-            } else {
-                alert(err.message);
-            }
+            if(errEl) { errEl.innerText = err.message; errEl.classList.remove('hidden'); }
+            else { alert(err.message); }
         }
     }
 
@@ -1278,8 +1232,6 @@
         if (!currentUser) return;
         const statusText = document.getElementById('cloudStatusText');
         if(statusText) statusText.innerText = "Saving to cloud...";
-
-
         try {
             const docRef = window.firebaseMethods.doc(window.firebaseDb, 'cvs', currentUser.uid);
             await window.firebaseMethods.setDoc(docRef, cvData);
@@ -1295,12 +1247,8 @@
         if (!currentUser) return;
         const statusText = document.getElementById('cloudStatusText');
         if(statusText) statusText.innerText = "Saving changes...";
-
-
         if (autoSaveTimer) clearTimeout(autoSaveTimer);
-        autoSaveTimer = setTimeout(async () => {
-            await saveToCloud();
-        }, 1200);
+        autoSaveTimer = setTimeout(async () => { await saveToCloud(); }, 1200);
     }
 
 
@@ -1331,7 +1279,7 @@
     }
 
 
-    // --- Manual Free HD Image Cropper Logic ---
+    // --- Full Photo Custom Crop Logic (No Pre-Cropping) ---
     function openImageCropModal(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -1385,32 +1333,34 @@
 
 
         ctx.filter = 'none';
-        if (filter === 'enhance') {
-            ctx.filter = 'contrast(1.2) saturate(1.1)';
-        } else if (filter === 'grayscale') {
-            ctx.filter = 'grayscale(100%) contrast(1.1)';
-        }
+        if (filter === 'enhance') ctx.filter = 'contrast(1.2) saturate(1.1)';
+        else if (filter === 'grayscale') ctx.filter = 'grayscale(100%) contrast(1.1)';
 
 
-        const baseSize = Math.min(cropSourceImage.width, cropSourceImage.height);
-        const drawW = baseSize * zoom;
-        const drawH = baseSize * zoom;
+        // Display the FULL original photo scaled to fit/cover with zoom and offset
+        const imgW = cropSourceImage.width;
+        const imgH = cropSourceImage.height;
+        const hRatio = canvas.width / imgW;
+        const vRatio = canvas.height / imgH;
+        const baseScale = Math.min(hRatio, vRatio);
+        const currentScale = baseScale * zoom;
+
+
+        const drawW = imgW * currentScale;
+        const drawH = imgH * currentScale;
         const drawX = (canvas.width - drawW) / 2 + cropOffsetX;
         const drawY = (canvas.height - drawH) / 2 + cropOffsetY;
 
 
-        const sx = (cropSourceImage.width - baseSize) / 2;
-        const sy = (cropSourceImage.height - baseSize) / 2;
+        ctx.drawImage(cropSourceImage, 0, 0, imgW, imgH, drawX, drawY, drawW, drawH);
 
 
-        ctx.drawImage(cropSourceImage, sx, sy, baseSize, baseSize, drawX, drawY, drawW, drawH);
-
-
+        // Draw overlay circular boundary guide
         ctx.filter = 'none';
         ctx.strokeStyle = 'rgba(79, 70, 229, 0.8)';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, 120, 0, Math.PI * 2);
+        ctx.arc(canvas.width / 2, canvas.height / 2, 110, 0, Math.PI * 2);
         ctx.stroke();
     }
 
@@ -1435,9 +1385,7 @@
         });
 
 
-        window.addEventListener('mouseup', () => {
-            isDraggingCrop = false;
-        });
+        window.addEventListener('mouseup', () => { isDraggingCrop = false; });
 
 
         canvas.addEventListener('touchstart', (e) => {
@@ -1457,9 +1405,7 @@
         });
 
 
-        canvas.addEventListener('touchend', () => {
-            isDraggingCrop = false;
-        });
+        canvas.addEventListener('touchend', () => { isDraggingCrop = false; });
     }
 
 
@@ -1479,18 +1425,21 @@
         else if (filter === 'grayscale') hdCtx.filter = 'grayscale(100%) contrast(1.1)';
 
 
-        const baseSize = Math.min(cropSourceImage.width, cropSourceImage.height);
-        const drawW = baseSize * zoom * 2;
-        const drawH = baseSize * zoom * 2;
+        const imgW = cropSourceImage.width;
+        const imgH = cropSourceImage.height;
+        const hRatio = hdCanvas.width / imgW;
+        const vRatio = hdCanvas.height / imgH;
+        const baseScale = Math.min(hRatio, vRatio);
+        const currentScale = baseScale * zoom;
+
+
+        const drawW = imgW * currentScale;
+        const drawH = imgH * currentScale;
         const drawX = (hdCanvas.width - drawW) / 2 + (cropOffsetX * 2);
         const drawY = (hdCanvas.height - drawH) / 2 + (cropOffsetY * 2);
 
 
-        const sx = (cropSourceImage.width - baseSize) / 2;
-        const sy = (cropSourceImage.height - baseSize) / 2;
-
-
-        hdCtx.drawImage(cropSourceImage, sx, sy, baseSize, baseSize, drawX, drawY, drawW, drawH);
+        hdCtx.drawImage(cropSourceImage, 0, 0, imgW, imgH, drawX, drawY, drawW, drawH);
 
 
         cvData.profileImage = hdCanvas.toDataURL('image/jpeg', 0.95);
@@ -1513,16 +1462,10 @@
         }
 
 
-        document.querySelectorAll('.editor-content').forEach(content => {
-            content.classList.add('hidden');
-        });
+        document.querySelectorAll('.editor-content').forEach(content => { content.classList.add('hidden'); });
         const activeContent = document.getElementById('content-' + tabId);
-        if (activeContent) {
-            activeContent.classList.remove('hidden');
-        }
-        if (tabId === 'coverletter') {
-            generateAutoCoverLetter();
-        }
+        if (activeContent) activeContent.classList.remove('hidden');
+        if (tabId === 'coverletter') generateAutoCoverLetter();
     }
 
 
@@ -1563,9 +1506,7 @@
     function selectCategory(catId) {
         cvData.templateCat = catId;
         const catObj = categories.find(c => c.id === catId);
-        if (catObj && catObj.subTemplates.length > 0) {
-            cvData.subTemplate = catObj.subTemplates[0].id;
-        }
+        if (catObj && catObj.subTemplates.length > 0) cvData.subTemplate = catObj.subTemplates[0].id;
         renderCategories();
         triggerUpdate();
     }
@@ -1591,9 +1532,7 @@
 
     function updatePageSizeSelection() {
         const radios = document.querySelectorAll('input[name="pageSize"]');
-        radios.forEach(r => {
-            if(r.value === cvData.pageSize) r.checked = true;
-        });
+        radios.forEach(r => { if(r.value === cvData.pageSize) r.checked = true; });
         applyPageSizeClass();
     }
 
@@ -1601,7 +1540,7 @@
     function applyPageSizeClass() {
         const wrapper = document.getElementById('previewSheetWrapper');
         if(!wrapper) return;
-        wrapper.className = "relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden shrink-0";
+        wrapper.className = "relative transition-all duration-300 shadow-2xl bg-white text-slate-900 rounded-sm overflow-hidden";
         if (cvData.pageSize === 'letter') wrapper.classList.add('page-letter');
         else if (cvData.pageSize === 'legal') wrapper.classList.add('page-legal');
         else if (cvData.pageSize === 'a5') wrapper.classList.add('page-a5');
@@ -1634,9 +1573,7 @@
 
     function updateMarginUI() {
         const radios = document.querySelectorAll('input[name="marginPreset"]');
-        radios.forEach(r => {
-            if(r.value === cvData.marginPreset) r.checked = true;
-        });
+        radios.forEach(r => { if(r.value === cvData.marginPreset) r.checked = true; });
         const customDiv = document.getElementById('customMarginControl');
         if (cvData.marginPreset === 'custom') {
             if(customDiv) customDiv.classList.remove('hidden');
@@ -1734,16 +1671,13 @@
 
     function updateFieldFromPreview(field, val) {
         cvData[field] = val;
-        if(document.getElementById(field)) {
-            document.getElementById(field).value = val;
-        }
+        if(document.getElementById(field)) document.getElementById(field).value = val;
         calculateAtsScore();
         generateAutoCoverLetter();
         triggerAutoCloudSync();
     }
 
 
-    // --- Drag & Drop Section Order Logic ---
     function renderSectionOrderList() {
         const container = document.getElementById('sectionOrderList');
         if (!container) return;
@@ -1810,7 +1744,6 @@
     }
 
 
-    // --- Page Break Visual Indicator ---
     function renderPageBreakIndicators() {
         const overlay = document.getElementById('pageBreakOverlay');
         const wrapper = document.getElementById('previewSheetWrapper');
@@ -1822,13 +1755,7 @@
         if (toggle && !toggle.checked) return;
 
 
-        const pageHeightsPx = {
-            a4: 1122.5,
-            letter: 1056,
-            legal: 1344,
-            a5: 793.7,
-            b5: 944.8
-        };
+        const pageHeightsPx = { a4: 1122.5, letter: 1056, legal: 1344, a5: 793.7, b5: 944.8 };
         const singlePageH = pageHeightsPx[cvData.pageSize] || 1122.5;
         const totalH = wrapper.scrollHeight;
         let pageNum = 1;
@@ -1844,7 +1771,6 @@
     }
 
 
-    // --- Date Parsing & Duration Calculation Helpers ---
     function escapeAttr(str) {
         return String(str || '').replace(/"/g, '&quot;');
     }
@@ -2758,7 +2684,6 @@ function renderPreview() {
     setTimeout(renderPageBreakIndicators, 50);
 }
 
-// --- Auto Cover Letter Generator, Download & Print ---
 function generateAutoCoverLetter(forceReset = false) {
     const companyInput = document.getElementById('clCompanyName');
     const managerInput = document.getElementById('clManagerName');
@@ -2830,9 +2755,7 @@ function printResume() {
 function printCoverLetter() {
     document.body.classList.add('printing-cover-letter');
     window.print();
-    setTimeout(() => {
-        document.body.classList.remove('printing-cover-letter');
-    }, 500);
+    setTimeout(() => { document.body.classList.remove('printing-cover-letter'); }, 500);
 }
 
 function downloadCoverLetterDOC() {
@@ -2848,19 +2771,11 @@ function downloadCoverLetterDOC() {
     triggerFileDownload(blob, `${nameSlug}_Cover_Letter_${companySlug}.doc`);
 }
 
-// --- ATS Job Description Matching Analyzer ---
-function openAtsMatcherModal() {
-    document.getElementById('atsMatcherModal')?.classList.remove('hidden');
-}
-function closeAtsMatcherModal() {
-    document.getElementById('atsMatcherModal')?.classList.add('hidden');
-}
+function openAtsMatcherModal() { document.getElementById('atsMatcherModal')?.classList.remove('hidden'); }
+function closeAtsMatcherModal() { document.getElementById('atsMatcherModal')?.classList.add('hidden'); }
 function analyzeJobMatch() {
     const jdText = (document.getElementById('jdInputTextarea')?.value || '').toLowerCase();
-    if (!jdText.trim()) {
-        alert('Please paste a Job Description first.');
-        return;
-    }
+    if (!jdText.trim()) { alert('Please paste a Job Description first.'); return; }
     const stopWords = new Set(['and','the','for','with','you','are','will','have','from','that','this','your','our','work','team','role','experience','years','skills','ability','strong','good','knowledge','using','etc','including','such','their','they','been','more','than','into','over','must','should','preferred','required']);
     const jdWords = jdText.replace(/[^a-z0-9+#.\s]/g, ' ').split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
     const uniqueKeywords = [...new Set(jdWords)].slice(0, 30);
@@ -2872,8 +2787,7 @@ function analyzeJobMatch() {
         ...(cvData.educations || []).map(ed => ed.degree)
     ].join(' ').toLowerCase();
 
-    const matched = [];
-    const missing = [];
+    const matched = [], missing = [];
     uniqueKeywords.forEach(kw => {
         if (cvFullText.includes(kw)) matched.push(kw);
         else missing.push(kw);
@@ -2890,7 +2804,6 @@ function analyzeJobMatch() {
         : '<span class="text-emerald-400">All key terms matched!</span>';
 }
 
-// --- Public Sharing Link ---
 function openShareLinkModal() {
     const sharePayload = { ...cvData, profileImage: '' };
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(sharePayload))));
@@ -2900,9 +2813,7 @@ function openShareLinkModal() {
     document.getElementById('shareCopyFeedback')?.classList.add('hidden');
     document.getElementById('shareLinkModal')?.classList.remove('hidden');
 }
-function closeShareLinkModal() {
-    document.getElementById('shareLinkModal')?.classList.add('hidden');
-}
+function closeShareLinkModal() { document.getElementById('shareLinkModal')?.classList.add('hidden'); }
 function copyShareUrl() {
     const input = document.getElementById('generatedShareUrl');
     if (!input) return;
@@ -2942,15 +2853,6 @@ function loadSampleData() {
                 endDate: 'Present',
                 showDurationCalc: true,
                 desc: '• Managed microservices migration and led a team of <b>5 engineers</b>.\n• Reduced API latency by <mark>35%</mark> using Redis caching.'
-            },
-            {
-                title: 'Software Engineer',
-                company: 'DevCraft Studio',
-                location: 'Sylhet, Bangladesh',
-                startDate: '01 Jun 2018',
-                endDate: '31 Jan 2021',
-                showDurationCalc: true,
-                desc: '1. Built high-performance frontend components.\n2. Integrated REST APIs and automated CI/CD pipelines.'
             }
         ],
         projects: [
@@ -3011,9 +2913,7 @@ function importJSON(event) {
                 triggerUpdate();
                 generateAutoCoverLetter();
                 alert('CV data imported successfully!');
-            } catch (err) {
-                alert('Invalid JSON file format.');
-            }
+            } catch (err) { alert('Invalid JSON file format.'); }
         };
         reader.readAsText(file);
     }
@@ -3028,9 +2928,7 @@ function toggleExportMenu(event) {
 document.addEventListener('click', function(event) {
     const wrapper = document.getElementById('exportDropdownWrapper');
     const menu = document.getElementById('exportDropdownMenu');
-    if (wrapper && menu && !wrapper.contains(event.target)) {
-        menu.classList.add('hidden');
-    }
+    if (wrapper && menu && !wrapper.contains(event.target)) menu.classList.add('hidden');
 });
 
 function getSafeFileName(ext) {
