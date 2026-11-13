@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,44 +14,50 @@
       import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
       import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCxvKQFLWXJF77U5hgssFkr_do_GZv8OBI",
-    authDomain: "resume-maker-b05b6.firebaseapp.com",
-    projectId: "resume-maker-b05b6",
-    storageBucket: "resume-maker-b05b6.firebasestorage.app",
-    messagingSenderId: "275583785714",
-    appId: "1:275583785714:web:7f371d98725405cf6c4e6b",
-    measurementId: "G-QL0E1GH373"
-  };
+      const firebaseConfig = {
+        apiKey: "AIzaSyCxvKQFLWXJF77U5hgssFkr_do_GZv8OBI",
+        authDomain: "resume-maker-b05b6.firebaseapp.com",
+        projectId: "resume-maker-b05b6",
+        storageBucket: "resume-maker-b05b6.firebasestorage.app",
+        messagingSenderId: "275583785714",
+        appId: "1:275583785714:web:7f371d98725405cf6c4e6b",
+        measurementId: "G-QL0E1GH373"
+      };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
 
-  window.firebaseAuth = auth;
-  window.firebaseDb = db;
-  window.firebaseMethods = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, doc, setDoc, getDoc, sendPasswordResetEmail };
-</script>
-<style>
-    body { font-family: 'Inter', 'Noto Sans Bengali', sans-serif; }
-    .font-merriweather { font-family: 'Merriweather', serif; }
-    .font-roboto { font-family: 'Roboto', sans-serif; }
-    @media print {
-        body * { visibility: hidden; }
-        #printable-cv, #printable-cv * { visibility: visible; }
-        #printable-cv { position: absolute; left: 0; top: 0; width: 100%; margin: 0; box-shadow: none !important; }
-        .no-print { display: none !important; }
-        @page {
-            size: auto;
-            margin: 0mm;
+      window.firebaseAuth = auth;
+      window.firebaseDb = db;
+      window.firebaseMethods = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, doc, setDoc, getDoc, sendPasswordResetEmail };
+    </script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans Bengali', sans-serif; }
+        .font-merriweather { font-family: 'Merriweather', serif; }
+        .font-roboto { font-family: 'Roboto', sans-serif; }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-cv, #printable-cv * { visibility: visible; }
+            #printable-cv { position: absolute; left: 0; top: 0; width: 100%; margin: 0; box-shadow: none !important; }
+            .no-print { display: none !important; }
+            @page {
+                size: auto;
+                margin: 0mm;
+            }
         }
-    }
-    .page-a4 { width: 210mm; min-height: 297mm; }
-    .page-letter { width: 8.5in; min-height: 11in; }
-    .page-legal { width: 8.5in; min-height: 14in; }
-    .page-a5 { width: 148mm; min-height: 210mm; }
-    .page-b5 { width: 176mm; min-height: 250mm; }
-</style>
+        .page-a4 { width: 210mm; min-height: 297mm; }
+        .page-letter { width: 8.5in; min-height: 11in; }
+        .page-legal { width: 8.5in; min-height: 14in; }
+        .page-a5 { width: 148mm; min-height: 210mm; }
+        .page-b5 { width: 176mm; min-height: 250mm; }
+
+        /* Experience Formatted Text Styling */
+        .exp-formatted-desc ul { list-style-type: disc; padding-left: 1.25rem; margin: 0.2rem 0; }
+        .exp-formatted-desc ol { list-style-type: decimal; padding-left: 1.25rem; margin: 0.2rem 0; }
+        .exp-formatted-desc li { margin-bottom: 0.15rem; }
+        .exp-formatted-desc mark { background-color: #fef08a; color: #0f172a; padding: 0 3px; border-radius: 2px; }
+    </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
 
@@ -439,8 +444,24 @@
         linkedin: 'linkedin.com/in/tanvir-ahmed',
         summary: 'Passionate Senior Software Engineer with 6+ years of experience building scalable web applications, microservices, and leading high-performing engineering teams.',
         experiences: [
-            { title: 'Lead Software Engineer', company: 'TechNova Solutions', duration: '2022 - Present', desc: 'Leading backend architecture using Node.js and React. Improved system performance by 40%.' },
-            { title: 'Software Developer', company: 'InnoSoft BD', duration: '2019 - 2022', desc: 'Developed and maintained cloud-native web apps. Collaborated with UI/UX teams.' }
+            {
+                title: 'Lead Software Engineer',
+                company: 'TechNova Solutions',
+                location: 'Dhaka, Bangladesh',
+                startDate: '15 Jan 2022',
+                endDate: 'Present',
+                showDurationCalc: true,
+                desc: '• Leading backend architecture using <b>Node.js</b> and <b>React</b>.\n• Improved system performance by <mark>40%</mark> across core services.'
+            },
+            {
+                title: 'Software Developer',
+                company: 'InnoSoft BD',
+                location: 'Chattogram, Bangladesh',
+                startDate: '01 Mar 2019',
+                endDate: '31 Dec 2021',
+                showDurationCalc: true,
+                desc: '1. Developed and maintained cloud-native web apps.\n2. Collaborated with UI/UX teams for responsive delivery.'
+            }
         ],
         projects: [
             { name: 'Enterprise SaaS Platform', link: 'github.com/tanvir/saas', desc: 'Built a multi-tenant enterprise dashboard with real-time analytics.' }
@@ -847,20 +868,435 @@
         calculateAtsScore();
     }
 
+    // --- Date Parsing & Duration Calculation Helpers ---
+    function escapeAttr(str) {
+        return String(str || '').replace(/"/g, '&quot;');
+    }
+
+    function parseFlexibleDate(str) {
+        if (!str) return null;
+        const clean = String(str).trim();
+        if (!clean) return null;
+        if (/^(present|current|now|ongoing|till date|continue|running)$/i.test(clean)) {
+            const now = new Date();
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        }
+        // YYYY-MM-DD
+        const isoFull = clean.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+        if (isoFull) {
+            return new Date(parseInt(isoFull[1], 10), parseInt(isoFull[2], 10) - 1, parseInt(isoFull[3], 10));
+        }
+        // DD/MM/YYYY or DD-MM-YYYY
+        const dmy = clean.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+        if (dmy) {
+            const p1 = parseInt(dmy[1], 10);
+            const p2 = parseInt(dmy[2], 10);
+            const y = parseInt(dmy[3], 10);
+            if (p1 > 12) return new Date(y, p2 - 1, p1);
+            if (p2 > 12) return new Date(y, p1 - 1, p2);
+            return new Date(y, p2 - 1, p1); // Default DD/MM/YYYY
+        }
+        // YYYY-MM
+        const ym = clean.match(/^(\d{4})[\/\-](\d{1,2})$/);
+        if (ym) {
+            return new Date(parseInt(ym[1], 10), parseInt(ym[2], 10) - 1, 1);
+        }
+        // Only YYYY
+        const yOnly = clean.match(/^(\d{4})$/);
+        if (yOnly) {
+            return new Date(parseInt(yOnly[1], 10), 0, 1);
+        }
+        // Standard JS Date parse (e.g., "15 Jan 2022", "Jan 2022", "January 15, 2022")
+        const parsed = new Date(clean);
+        if (!isNaN(parsed.getTime())) {
+            return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+        }
+        return null;
+    }
+
+    function formatDisplayDateFromPicker(isoDateStr) {
+        if (!isoDateStr) return '';
+        const parts = isoDateStr.split('-');
+        if (parts.length !== 3) return isoDateStr;
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const y = parts[0];
+        const m = months[parseInt(parts[1], 10) - 1] || parts[1];
+        const d = parts[2];
+        return `${d} ${m} ${y}`;
+    }
+
+    function toISODateInput(str) {
+        const d = parseFlexibleDate(str);
+        if (!d || /^(present|current|now|ongoing|till date)$/i.test(String(str || '').trim())) return '';
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    }
+
+    function calculateExactDurationText(startStr, endStr) {
+        const start = parseFlexibleDate(startStr);
+        const end = parseFlexibleDate(endStr);
+        if (!start || !end || end < start) return '';
+
+        let years = end.getFullYear() - start.getFullYear();
+        let months = end.getMonth() - start.getMonth();
+        let days = end.getDate() - start.getDate();
+
+        if (days < 0) {
+            months -= 1;
+            const prevMonthDays = new Date(end.getFullYear(), end.getMonth(), 0).getDate();
+            days += prevMonthDays;
+        }
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+
+        let parts = [];
+        if (years > 0) parts.push(`${years} ${years === 1 ? 'Year' : 'Years'}`);
+        if (months > 0) parts.push(`${months} ${months === 1 ? 'Month' : 'Months'}`);
+        if (days > 0 || parts.length === 0) parts.push(`${days} ${days === 1 ? 'Day' : 'Days'}`);
+
+        return parts.join(', ');
+    }
+
+    function formatExperienceDurationDisplay(exp) {
+        // Backward compatibility if older data only had `duration`
+        if (!exp.startDate && !exp.endDate && exp.duration) {
+            return exp.duration;
+        }
+        const s = (exp.startDate || '').trim();
+        const e = (exp.endDate || '').trim();
+        let rangeText = '';
+        if (s && e) rangeText = `${s} - ${e}`;
+        else if (s) rangeText = s;
+        else if (e) rangeText = e;
+
+        const isVisible = exp.showDurationCalc !== false;
+        if (isVisible && s && e) {
+            const calc = calculateExactDurationText(s, e);
+            if (calc) {
+                rangeText += ` (${calc})`;
+            }
+        }
+        return rangeText;
+    }
+
+    function openDatePicker(inputId) {
+        const picker = document.getElementById(inputId);
+        if (!picker) return;
+        if (typeof picker.showPicker === 'function') {
+            picker.showPicker();
+        } else {
+            picker.click();
+        }
+    }
+
+    function onCalendarPicked(idx, field, isoVal) {
+        if (!isoVal) return;
+        const formatted = formatDisplayDateFromPicker(isoVal);
+        cvData.experiences[idx][field] = formatted;
+        const textInput = document.getElementById(`exp-${field}-text-${idx}`);
+        if (textInput) textInput.value = formatted;
+        updateDurationPreviewBadge(idx);
+        triggerUpdate();
+    }
+
+    function togglePresentEndDate(idx, isChecked) {
+        const val = isChecked ? 'Present' : '';
+        cvData.experiences[idx].endDate = val;
+        const textInput = document.getElementById(`exp-endDate-text-${idx}`);
+        if (textInput) textInput.value = val;
+        updateDurationPreviewBadge(idx);
+        triggerUpdate();
+    }
+
+    function updateDurationPreviewBadge(idx) {
+        const badge = document.getElementById(`exp-calc-badge-${idx}`);
+        if (!badge) return;
+        const exp = cvData.experiences[idx];
+        const calc = calculateExactDurationText(exp.startDate, exp.endDate);
+        if (calc) {
+            badge.innerText = `(${calc})`;
+            badge.className = exp.showDurationCalc !== false
+                ? 'text-[11px] font-semibold text-emerald-400'
+                : 'text-[11px] font-semibold text-slate-500 line-through';
+        } else {
+            badge.innerText = '(তারিখ দিলে বছর, মাস ও দিন দেখাবে)';
+            badge.className = 'text-[10px] text-slate-400';
+        }
+    }
+
+    // --- Helper for Rich Text Formatting in Experience ---
+    function formatExperienceText(idx, type) {
+        const textarea = document.getElementById(`exp-desc-${idx}`);
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const val = textarea.value;
+        const selectedText = val.substring(start, end);
+
+        let newVal = val;
+        let newCursorPos = end;
+
+        if (type === 'bold' || type === 'italic' || type === 'highlight') {
+            const tag = type === 'bold' ? 'b' : (type === 'italic' ? 'i' : 'mark');
+            if (selectedText.length > 0) {
+                const replacement = `<${tag}>${selectedText}</${tag}>`;
+                newVal = val.substring(0, start) + replacement + val.substring(end);
+                newCursorPos = start + replacement.length;
+            } else {
+                const placeholder = type === 'bold' ? 'Bold text' : (type === 'italic' ? 'Italic text' : 'Highlight');
+                const replacement = `<${tag}>${placeholder}</${tag}>`;
+                newVal = val.substring(0, start) + replacement + val.substring(end);
+                newCursorPos = start + tag.length + 2;
+            }
+        } else if (type === 'bullet' || type === 'number') {
+            if (selectedText.length > 0) {
+                const lines = selectedText.split('\n');
+                const formattedLines = lines.map((line, i) => {
+                    const cleanLine = line.replace(/^(\s*[-*•]\s+|\s*\d+\.\s+)/, '');
+                    return type === 'bullet' ? `• ${cleanLine}` : `${i + 1}. ${cleanLine}`;
+                });
+                const replacement = formattedLines.join('\n');
+                newVal = val.substring(0, start) + replacement + val.substring(end);
+                newCursorPos = start + replacement.length;
+            } else {
+                const lineStart = val.lastIndexOf('\n', start - 1) + 1;
+                const lineEndIdx = val.indexOf('\n', start);
+                const lineEnd = lineEndIdx === -1 ? val.length : lineEndIdx;
+                const currentLine = val.substring(lineStart, lineEnd);
+                const cleanLine = currentLine.replace(/^(\s*[-*•]\s+|\s*\d+\.\s+)/, '');
+                const prefix = type === 'bullet' ? '• ' : '1. ';
+                const replacement = prefix + cleanLine;
+                newVal = val.substring(0, lineStart) + replacement + val.substring(lineEnd);
+                newCursorPos = lineStart + replacement.length;
+            }
+        }
+
+        textarea.value = newVal;
+        updateExperience(idx, 'desc', newVal);
+        textarea.focus();
+        textarea.setSelectionRange(newCursorPos, newCursorPos);
+    }
+
+    // Auto-continue bullets or numbers when pressing Enter inside Experience description
+    function handleExperienceKeydown(e, idx) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            const textarea = e.target;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const val = textarea.value;
+
+            const lineStart = val.lastIndexOf('\n', start - 1) + 1;
+            const currentLineBeforeCursor = val.substring(lineStart, start);
+
+            // Check for bullet list (•, -, *)
+            const bulletMatch = currentLineBeforeCursor.match(/^(\s*[•\-\*]\s+)(.*)$/);
+            if (bulletMatch) {
+                e.preventDefault();
+                if (bulletMatch[2].trim() === '') {
+                    const newVal = val.substring(0, lineStart) + '\n' + val.substring(end);
+                    textarea.value = newVal;
+                    updateExperience(idx, 'desc', newVal);
+                    textarea.setSelectionRange(lineStart + 1, lineStart + 1);
+                } else {
+                    const insert = '\n' + bulletMatch[1];
+                    const newVal = val.substring(0, start) + insert + val.substring(end);
+                    textarea.value = newVal;
+                    updateExperience(idx, 'desc', newVal);
+                    textarea.setSelectionRange(start + insert.length, start + insert.length);
+                }
+                return;
+            }
+
+            // Check for numbered list (1., 2., etc.)
+            const numMatch = currentLineBeforeCursor.match(/^(\s*)(\d+)\.\s+(.*)$/);
+            if (numMatch) {
+                e.preventDefault();
+                if (numMatch[3].trim() === '') {
+                    const newVal = val.substring(0, lineStart) + '\n' + val.substring(end);
+                    textarea.value = newVal;
+                    updateExperience(idx, 'desc', newVal);
+                    textarea.setSelectionRange(lineStart + 1, lineStart + 1);
+                } else {
+                    const nextNum = parseInt(numMatch[2], 10) + 1;
+                    const insert = `\n${numMatch[1]}${nextNum}. `;
+                    const newVal = val.substring(0, start) + insert + val.substring(end);
+                    textarea.value = newVal;
+                    updateExperience(idx, 'desc', newVal);
+                    textarea.setSelectionRange(start + insert.length, start + insert.length);
+                }
+                return;
+            }
+        }
+    }
+
+    // Safely render formatted description (supports Enter line breaks, Bold, Italic, Highlight, Bullet & Number lists)
+    function formatRichDescriptionHTML(rawText) {
+        if (!rawText) return '';
+        
+        let escaped = String(rawText)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        escaped = escaped
+            .replace(/&lt;(\/?(b|strong|i|em|mark|u))&gt;/gi, '<$1>');
+
+        const lines = escaped.split(/\r?\n/);
+        let htmlParts = [];
+        let listType = null;
+
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            const bulletMatch = trimmed.match(/^(?:•|-|\*)\s+(.*)$/);
+            const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+
+            if (bulletMatch) {
+                if (listType !== 'ul') {
+                    if (listType) htmlParts.push(`</${listType}>`);
+                    htmlParts.push('<ul>');
+                    listType = 'ul';
+                }
+                htmlParts.push(`<li>${bulletMatch[1]}</li>`);
+            } else if (numMatch) {
+                if (listType !== 'ol') {
+                    if (listType) htmlParts.push(`</${listType}>`);
+                    htmlParts.push('<ol>');
+                    listType = 'ol';
+                }
+                htmlParts.push(`<li>${numMatch[2]}</li>`);
+            } else {
+                if (listType) {
+                    htmlParts.push(`</${listType}>`);
+                    listType = null;
+                }
+                if (trimmed === '') {
+                    htmlParts.push('<div class="h-2"></div>');
+                } else {
+                    htmlParts.push(`<div>${line}</div>`);
+                }
+            }
+        });
+
+        if (listType) {
+            htmlParts.push(`</${listType}>`);
+        }
+
+        return htmlParts.join('');
+    }
+
     function renderDynamicLists() {
         const expContainer = document.getElementById('experienceListContainer');
         if(expContainer) {
-            expContainer.innerHTML = cvData.experiences.map((exp, idx) => `
+            expContainer.innerHTML = cvData.experiences.map((exp, idx) => {
+                // Migrate legacy `duration` string if startDate/endDate not yet set
+                if (exp.startDate === undefined && exp.endDate === undefined && exp.duration) {
+                    const parts = exp.duration.split('-');
+                    exp.startDate = (parts[0] || '').trim();
+                    exp.endDate = (parts[1] || '').trim();
+                }
+                if (exp.showDurationCalc === undefined) exp.showDurationCalc = true;
+
+                const isPresent = /^(present|current|now|ongoing)$/i.test((exp.endDate || '').trim());
+                const calcText = calculateExactDurationText(exp.startDate, exp.endDate);
+
+                return `
                 <div class="bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/70 space-y-3 relative">
-                    <button onclick="removeExperience(${idx})" class="absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs"><i class="fa-solid fa-trash"></i></button>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="text" placeholder="Job Title" value="${exp.title}" oninput="updateExperience(${idx}, 'title', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
-                        <input type="text" placeholder="Company Name" value="${exp.company}" oninput="updateExperience(${idx}, 'company', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                    <button onclick="removeExperience(${idx})" class="absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs" title="Remove"><i class="fa-solid fa-trash"></i></button>
+                    
+                    <!-- Row 1: Job Title & Company Name -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pr-5">
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-1">Job Title / Designation</label>
+                            <input type="text" placeholder="e.g. Senior Software Engineer" value="${escapeAttr(exp.title)}" oninput="updateExperience(${idx}, 'title', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-1">Company Name</label>
+                            <input type="text" placeholder="e.g. TechNova Solutions" value="${escapeAttr(exp.company)}" oninput="updateExperience(${idx}, 'company', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
                     </div>
-                    <input type="text" placeholder="Duration" value="${exp.duration}" oninput="updateExperience(${idx}, 'duration', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
-                    <textarea placeholder="Description" rows="2" oninput="updateExperience(${idx}, 'desc', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">${exp.desc}</textarea>
+
+                    <!-- Row 2: Company Location -->
+                    <div>
+                        <label class="text-[10px] text-slate-400 block mb-1">Company Location</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-location-dot absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                            <input type="text" placeholder="e.g. Dhaka, Bangladesh" value="${escapeAttr(exp.location || '')}" oninput="updateExperience(${idx}, 'location', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 pl-7 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Start Date & End Date (Manual + Calendar Picker) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-1">Start Date (লিখুন বা ক্যালেন্ডার সিলেক্ট করুন)</label>
+                            <div class="relative flex items-center">
+                                <input type="text" id="exp-startDate-text-${idx}" placeholder="e.g. 15 Jan 2022" value="${escapeAttr(exp.startDate || '')}" oninput="updateExperience(${idx}, 'startDate', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 pr-8 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <input type="date" id="exp-startDate-picker-${idx}" value="${toISODateInput(exp.startDate)}" onchange="onCalendarPicked(${idx}, 'startDate', this.value)" class="sr-only">
+                                <button type="button" onclick="openDatePicker('exp-startDate-picker-${idx}')" class="absolute right-2 text-indigo-400 hover:text-indigo-300 p-1" title="ক্যালেন্ডার থেকে তারিখ সিলেক্ট করুন">
+                                    <i class="fa-solid fa-calendar-days text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-[10px] text-slate-400">End Date</label>
+                                <label class="text-[10px] text-indigo-400 flex items-center gap-1 cursor-pointer">
+                                    <input type="checkbox" ${isPresent ? 'checked' : ''} onchange="togglePresentEndDate(${idx}, this.checked)" class="rounded text-indigo-600"> Present
+                                </label>
+                            </div>
+                            <div class="relative flex items-center">
+                                <input type="text" id="exp-endDate-text-${idx}" placeholder="e.g. 31 Dec 2024 বা Present" value="${escapeAttr(exp.endDate || '')}" oninput="updateExperience(${idx}, 'endDate', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 pr-8 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <input type="date" id="exp-endDate-picker-${idx}" value="${toISODateInput(exp.endDate)}" onchange="onCalendarPicked(${idx}, 'endDate', this.value)" class="sr-only">
+                                <button type="button" onclick="openDatePicker('exp-endDate-picker-${idx}')" class="absolute right-2 text-indigo-400 hover:text-indigo-300 p-1" title="ক্যালেন্ডার থেকে তারিখ সিলেক্ট করুন">
+                                    <i class="fa-solid fa-calendar-days text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto Calculated Duration Preview & Visible/Invisible Toggle -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-700/60">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] text-slate-400"><i class="fa-regular fa-clock mr-1 text-indigo-400"></i> মোট সময়কাল:</span>
+                            <span id="exp-calc-badge-${idx}" class="${calcText ? (exp.showDurationCalc ? 'text-[11px] font-semibold text-emerald-400' : 'text-[11px] font-semibold text-slate-500 line-through') : 'text-[10px] text-slate-400'}">
+                                ${calcText ? `(${calcText})` : '(তারিখ দিলে বছর, মাস ও দিন দেখাবে)'}
+                            </span>
+                        </div>
+                        <label class="flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer select-none">
+                            <input type="checkbox" ${exp.showDurationCalc ? 'checked' : ''} onchange="updateExperience(${idx}, 'showDurationCalc', this.checked)" class="rounded text-indigo-600">
+                            <span>CV-তে দেখান (Visible)</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Rich Formatting Toolbar for Experience Description -->
+                    <div class="border border-slate-700 rounded-lg overflow-hidden bg-slate-800">
+                        <div class="flex flex-wrap items-center gap-1 bg-slate-900/80 px-2 py-1.5 border-b border-slate-700">
+                            <button type="button" onclick="formatExperienceText(${idx}, 'bold')" class="px-2 py-1 text-xs text-slate-200 hover:bg-slate-700 rounded transition font-bold" title="Bold (সিলেক্ট করে ক্লিক করুন)">
+                                <i class="fa-solid fa-bold"></i>
+                            </button>
+                            <button type="button" onclick="formatExperienceText(${idx}, 'italic')" class="px-2 py-1 text-xs text-slate-200 hover:bg-slate-700 rounded transition italic" title="Italic (বাঁকা লেখা)">
+                                <i class="fa-solid fa-italic"></i>
+                            </button>
+                            <button type="button" onclick="formatExperienceText(${idx}, 'highlight')" class="px-2 py-1 text-xs text-amber-300 hover:bg-slate-700 rounded transition flex items-center gap-1" title="Highlight Text">
+                                <i class="fa-solid fa-highlighter"></i> <span class="text-[10px]">Highlight</span>
+                            </button>
+                            <div class="h-3.5 w-[1px] bg-slate-700 mx-1"></div>
+                            <button type="button" onclick="formatExperienceText(${idx}, 'bullet')" class="px-2 py-1 text-xs text-slate-200 hover:bg-slate-700 rounded transition flex items-center gap-1" title="Bullet List">
+                                <i class="fa-solid fa-list-ul"></i> <span class="text-[10px]">Bullet</span>
+                            </button>
+                            <button type="button" onclick="formatExperienceText(${idx}, 'number')" class="px-2 py-1 text-xs text-slate-200 hover:bg-slate-700 rounded transition flex items-center gap-1" title="Numbered List">
+                                <i class="fa-solid fa-list-ol"></i> <span class="text-[10px]">Number</span>
+                            </button>
+                            <span class="ml-auto text-[10px] text-slate-400 hidden sm:inline">Enter চাপলে নতুন লাইন হবে</span>
+                        </div>
+                        <textarea id="exp-desc-${idx}" placeholder="কাজের বিবরণ লিখুন... (Enter চাপলে নতুন লাইন হবে, অথবা উপরের বাটন থেকে Bold, Italic, Highlight, Bullet, Number ব্যবহার করুন)" rows="4" oninput="updateExperience(${idx}, 'desc', this.value)" onkeydown="handleExperienceKeydown(event, ${idx})" class="w-full bg-slate-800 p-2.5 text-xs text-slate-200 focus:outline-none leading-relaxed">${exp.desc || ''}</textarea>
+                    </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         const projContainer = document.getElementById('projectListContainer');
@@ -869,8 +1305,8 @@
                 <div class="bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/70 space-y-3 relative">
                     <button onclick="removeProject(${idx})" class="absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs"><i class="fa-solid fa-trash"></i></button>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" placeholder="Project Name" value="${proj.name}" oninput="updateProject(${idx}, 'name', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
-                        <input type="text" placeholder="Link" value="${proj.link}" oninput="updateProject(${idx}, 'link', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Project Name" value="${escapeAttr(proj.name)}" oninput="updateProject(${idx}, 'name', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Link" value="${escapeAttr(proj.link)}" oninput="updateProject(${idx}, 'link', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
                     </div>
                     <textarea placeholder="Details" rows="2" oninput="updateProject(${idx}, 'desc', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">${proj.desc}</textarea>
                 </div>
@@ -883,12 +1319,12 @@
                 <div class="bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/70 space-y-3 relative">
                     <button onclick="removeEducation(${idx})" class="absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs"><i class="fa-solid fa-trash"></i></button>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" placeholder="Degree" value="${edu.degree}" oninput="updateEducation(${idx}, 'degree', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
-                        <input type="text" placeholder="Institution" value="${edu.institution}" oninput="updateEducation(${idx}, 'institution', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Degree" value="${escapeAttr(edu.degree)}" oninput="updateEducation(${idx}, 'degree', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Institution" value="${escapeAttr(edu.institution)}" oninput="updateEducation(${idx}, 'institution', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" placeholder="Duration" value="${edu.duration}" oninput="updateEducation(${idx}, 'duration', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
-                        <input type="text" placeholder="Grade" value="${edu.grade}" oninput="updateEducation(${idx}, 'grade', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Duration" value="${escapeAttr(edu.duration)}" oninput="updateEducation(${idx}, 'duration', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
+                        <input type="text" placeholder="Grade" value="${escapeAttr(edu.grade)}" oninput="updateEducation(${idx}, 'grade', this.value)" class="bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">
                     </div>
                 </div>
             `).join('');
@@ -899,16 +1335,34 @@
             customContainer.innerHTML = cvData.customSections.map((sec, idx) => `
                 <div class="bg-slate-800/40 p-3.5 rounded-xl border border-slate-700/70 space-y-3 relative">
                     <button onclick="removeCustomSection(${idx})" class="absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs"><i class="fa-solid fa-trash"></i></button>
-                    <input type="text" placeholder="Section Title" value="${sec.title}" oninput="updateCustomSection(${idx}, 'title', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200 font-bold">
+                    <input type="text" placeholder="Section Title" value="${escapeAttr(sec.title)}" oninput="updateCustomSection(${idx}, 'title', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200 font-bold">
                     <textarea placeholder="Content" rows="2" oninput="updateCustomSection(${idx}, 'content', this.value)" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-slate-200">${sec.content}</textarea>
                 </div>
             `).join('');
         }
     }
 
-    function addExperienceItem() { cvData.experiences.push({ title: '', company: '', duration: '', desc: '' }); renderDynamicLists(); triggerUpdate(); }
+    function addExperienceItem() {
+        cvData.experiences.push({
+            title: '',
+            company: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+            showDurationCalc: true,
+            desc: ''
+        });
+        renderDynamicLists();
+        triggerUpdate();
+    }
     function removeExperience(i) { cvData.experiences.splice(i, 1); renderDynamicLists(); triggerUpdate(); }
-    function updateExperience(i, field, val) { cvData.experiences[i][field] = val; triggerUpdate(); }
+    function updateExperience(i, field, val) {
+        cvData.experiences[i][field] = val;
+        if (field === 'startDate' || field === 'endDate' || field === 'showDurationCalc') {
+            updateDurationPreviewBadge(i);
+        }
+        triggerUpdate();
+    }
 
     function addProjectItem() { cvData.projects.push({ name: '', link: '', desc: '' }); renderDynamicLists(); triggerUpdate(); }
     function removeProject(i) { cvData.projects.splice(i, 1); renderDynamicLists(); triggerUpdate(); }
@@ -989,16 +1443,19 @@
 
         let skillsHtml = cvData.skills ? cvData.skills.split(',').map(s => `<span class="bg-slate-100 text-slate-800 px-2 py-1 rounded text-[11px] font-medium border border-slate-200">${s.trim()}</span>`).join(' ') : '';
         
-        let expHtml = cvData.experiences.map(e => `
+        let expHtml = cvData.experiences.map(e => {
+            const durationDisplay = formatExperienceDurationDisplay(e);
+            const companyLine = [e.company, e.location].filter(Boolean).join(' • ');
+            return `
             <div class="mb-3">
-                <div class="flex justify-between font-bold text-xs">
-                    <span>${e.title}</span>
-                    <span class="text-slate-600">${e.duration}</span>
+                <div class="flex justify-between items-baseline gap-2 font-bold text-xs">
+                    <span>${e.title || ''}</span>
+                    <span class="text-slate-600 font-medium text-[11px] text-right">${durationDisplay}</span>
                 </div>
-                <div class="text-xs font-semibold text-slate-700 mb-1">${e.company}</div>
-                <p class="text-xs text-slate-600 leading-relaxed">${e.desc}</p>
+                <div class="text-xs font-semibold text-slate-700 mb-1">${companyLine}</div>
+                <div class="text-xs text-slate-600 leading-relaxed exp-formatted-desc">${formatRichDescriptionHTML(e.desc)}</div>
             </div>
-        `).join('');
+        `}).join('');
 
         let projHtml = cvData.projects.map(p => `
             <div class="mb-3">
@@ -1006,7 +1463,7 @@
                     <span>${p.name}</span>
                     <span class="text-indigo-600 text-[11px]">${p.link}</span>
                 </div>
-                <p class="text-xs text-slate-600 leading-relaxed">${p.desc}</p>
+                <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-line">${p.desc}</p>
             </div>
         `).join('');
 
@@ -1041,7 +1498,7 @@
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Professional Summary</h3><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Professional Summary</h3><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Work Experience</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Projects</h3>${projHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Education</h3>${eduHtml}</div>
@@ -1065,7 +1522,7 @@
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div><h3 class="text-xs font-bold uppercase tracking-wider bg-slate-100 p-1 mb-1" style="color: ${cvData.primaryColor}">Summary</h3><p class="text-xs text-slate-700" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase tracking-wider bg-slate-100 p-1 mb-1" style="color: ${cvData.primaryColor}">Summary</h3><p class="text-xs text-slate-700 whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider bg-slate-100 p-1 mb-2" style="color: ${cvData.primaryColor}">Experience</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider bg-slate-100 p-1 mb-2" style="color: ${cvData.primaryColor}">Education</h3>${eduHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider bg-slate-100 p-1 mb-2" style="color: ${cvData.primaryColor}">Skills</h3><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1083,7 +1540,7 @@
                     </div>
                 </div>
                 <div class="space-y-4 border-t pt-4 border-slate-300">
-                    <div><h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-1">Profile</h4><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-1">Profile</h4><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">Professional Experience</h4>${expHtml}</div>
                     <div><h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">Education</h4>${eduHtml}</div>
                     <div><h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">Key Skills</h4><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1102,7 +1559,7 @@
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div><h3 class="text-xs font-bold uppercase bg-slate-200 p-1 mb-1 text-slate-900 border-l-4" style="border-color: ${cvData.primaryColor}">1. Career Objective</h3><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase bg-slate-200 p-1 mb-1 text-slate-900 border-l-4" style="border-color: ${cvData.primaryColor}">1. Career Objective</h3><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase bg-slate-200 p-1 mb-2 text-slate-900 border-l-4" style="border-color: ${cvData.primaryColor}">2. Employment Record</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase bg-slate-200 p-1 mb-2 text-slate-900 border-l-4" style="border-color: ${cvData.primaryColor}">3. Academic Qualifications</h3>${eduHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase bg-slate-200 p-1 mb-2 text-slate-900 border-l-4" style="border-color: ${cvData.primaryColor}">4. Professional Skills</h3><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1126,7 +1583,7 @@
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div><h3 class="text-xs font-bold uppercase tracking-wider mb-1" style="color: ${cvData.primaryColor}">Executive Summary</h3><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase tracking-wider mb-1" style="color: ${cvData.primaryColor}">Executive Summary</h3><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color: ${cvData.primaryColor}">Professional Experience</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color: ${cvData.primaryColor}">Projects & Initiatives</h3>${projHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color: ${cvData.primaryColor}">Education & Credentials</h3>${eduHtml}</div>
@@ -1144,7 +1601,7 @@
                     <p class="text-[11px] text-slate-600 mt-1">Email: ${cvData.email} | Phone: ${cvData.phone} | Address: ${cvData.location}</p>
                 </div>
                 <div class="space-y-3">
-                    <div><h4 class="text-xs font-bold uppercase bg-slate-100 p-1 text-slate-900 mb-1">Career Objective</h4><p class="text-xs text-slate-700" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h4 class="text-xs font-bold uppercase bg-slate-100 p-1 text-slate-900 mb-1">Career Objective</h4><p class="text-xs text-slate-700 whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h4 class="text-xs font-bold uppercase bg-slate-100 p-1 text-slate-900 mb-1">Work History</h4>${expHtml}</div>
                     <div><h4 class="text-xs font-bold uppercase bg-slate-100 p-1 text-slate-900 mb-1">Academic Background</h4>${eduHtml}</div>
                     <div><h4 class="text-xs font-bold uppercase bg-slate-100 p-1 text-slate-900 mb-1">Skills</h4><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1177,7 +1634,7 @@
                             <h1 class="text-2xl font-black text-slate-900" contenteditable="true" onblur="updateFieldFromPreview('fullName', this.innerText)">${cvData.fullName}</h1>
                             <p class="text-sm font-semibold" style="color: ${cvData.primaryColor}" contenteditable="true" onblur="updateFieldFromPreview('jobTitle', this.innerText)">${cvData.jobTitle}</p>
                         </div>
-                        <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Summary</h3><p class="text-xs text-slate-600 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                        <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Summary</h3><p class="text-xs text-slate-600 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                         <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Experience</h3>${expHtml}</div>
                         <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Projects</h3>${projHtml}</div>
                         <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Education</h3>${eduHtml}</div>
@@ -1201,7 +1658,7 @@
                     </div>
                 </div>
                 <div class="space-y-4 px-2">
-                    <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Executive Profile</h3><p class="text-xs text-slate-700" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-1" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Executive Profile</h3><p class="text-xs text-slate-700 whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Professional Experience</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Education</h3>${eduHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider pb-1 border-b mb-2" style="color: ${cvData.primaryColor}; border-color: ${cvData.primaryColor}">Core Expertise</h3><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1222,7 +1679,7 @@
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <div><h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1" style="color: ${cvData.primaryColor}">// About Me</h3><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1" style="color: ${cvData.primaryColor}">// About Me</h3><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2" style="color: ${cvData.primaryColor}">// Experience & Work</h3>${expHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2" style="color: ${cvData.primaryColor}">// Key Projects</h3>${projHtml}</div>
                     <div><h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2" style="color: ${cvData.primaryColor}">// Tech Stack</h3><div class="flex flex-wrap gap-1">${skillsHtml}</div></div>
@@ -1241,7 +1698,7 @@
                     </div>
                 </div>
                 <div class="space-y-5">
-                    <div><p class="text-xs text-slate-700 leading-relaxed" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
+                    <div><p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" contenteditable="true" onblur="updateFieldFromPreview('summary', this.innerText)">${cvData.summary}</p></div>
                     <div><h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Experience</h3>${expHtml}</div>
                     <div><h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Projects</h3>${projHtml}</div>
                     <div><h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Education</h3>${eduHtml}</div>
@@ -1290,11 +1747,27 @@
             linkedin: 'linkedin.com/in/farhan-dev',
             summary: 'Results-driven Full Stack Engineer with 7+ years building enterprise web solutions using React, Node.js, and AWS cloud architecture.',
             experiences: [
-                { title: 'Senior Developer', company: 'Global Tech Ltd', duration: '2021 - Present', desc: 'Managed microservices migration and led a team of 5 engineers.' },
-                { title: 'Software Engineer', company: 'DevCraft Studio', duration: '2018 - 2021', desc: 'Built high-performance frontend components and REST APIs.' }
+                {
+                    title: 'Senior Developer',
+                    company: 'Global Tech Ltd',
+                    location: 'Dhaka, Bangladesh',
+                    startDate: '10 Feb 2021',
+                    endDate: 'Present',
+                    showDurationCalc: true,
+                    desc: '• Managed microservices migration and led a team of <b>5 engineers</b>.\n• Reduced API latency by <mark>35%</mark> using Redis caching.'
+                },
+                {
+                    title: 'Software Engineer',
+                    company: 'DevCraft Studio',
+                    location: 'Sylhet, Bangladesh',
+                    startDate: '01 Jun 2018',
+                    endDate: '31 Jan 2021',
+                    showDurationCalc: true,
+                    desc: '1. Built high-performance frontend components.\n2. Integrated REST APIs and automated CI/CD pipelines.'
+                }
             ],
             projects: [
-                { name: 'E-Commerce Micro-ERP', link: 'github.com/farhan/erp', desc: 'Cloud inventory and billing management system with analytics.' }
+                { name: 'Enterprise SaaS Platform', link: 'github.com/farhan/erp', desc: 'Cloud inventory and billing management system with analytics.' }
             ],
             educations: [
                 { degree: 'B.Sc. in Software Engineering', institution: 'Shahjalal University of Science & Technology', duration: '2014 - 2018', grade: 'CGPA: 3.90' }
@@ -1387,18 +1860,21 @@
             ? `<td style="width:90px; vertical-align:middle; padding-right:14px;"><img src="${cvData.profileImage}" width="80" height="80" style="width:80px; height:80px; object-fit:cover; border:2px solid ${color};" /></td>`
             : '';
 
-        const expBlock = (cvData.experiences || []).map(e => `
+        const expBlock = (cvData.experiences || []).map(e => {
+            const durationDisplay = formatExperienceDurationDisplay(e);
+            const companyLine = [e.company, e.location].filter(Boolean).join(' • ');
+            return `
             <div style="margin-bottom:10px;">
                 <table style="width:100%; border-collapse:collapse;">
                     <tr>
                         <td style="font-weight:bold; font-size:11pt; color:#0f172a;">${e.title || ''}</td>
-                        <td style="text-align:right; font-size:9.5pt; color:#475569;">${e.duration || ''}</td>
+                        <td style="text-align:right; font-size:9.5pt; color:#475569;">${durationDisplay}</td>
                     </tr>
                 </table>
-                <div style="font-size:10pt; font-weight:bold; color:#334155; margin-bottom:2px;">${e.company || ''}</div>
-                <div style="font-size:10pt; color:#475569; line-height:1.45;">${(e.desc || '').replace(/\n/g, '<br>')}</div>
+                <div style="font-size:10pt; font-weight:bold; color:#334155; margin-bottom:2px;">${companyLine}</div>
+                <div style="font-size:10pt; color:#475569; line-height:1.45;">${formatRichDescriptionHTML(e.desc || '')}</div>
             </div>
-        `).join('');
+        `}).join('');
 
         const projBlock = (cvData.projects || []).map(p => `
             <div style="margin-bottom:10px;">
@@ -1443,6 +1919,9 @@
                 <style>
                     body { font-family: ${font}, 'Noto Sans Bengali', Calibri, Arial, sans-serif; color: #0f172a; margin: 0.6in; }
                     .sec-title { font-size: 10.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: ${color}; border-bottom: 1.5px solid ${color}; padding-bottom: 3px; margin-top: 14px; margin-bottom: 7px; }
+                    ul, ol { margin: 4px 0 4px 18px; padding: 0; }
+                    li { margin-bottom: 2px; }
+                    mark { background-color: #fef08a; }
                 </style>
             </head>
             <body>
@@ -1493,6 +1972,10 @@
   .font-merriweather { font-family: 'Merriweather', serif; }
   .font-roboto { font-family: 'Roboto', sans-serif; }
   .sheet { background: #fff; width: 210mm; min-height: 297mm; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+  .exp-formatted-desc ul { list-style-type: disc; padding-left: 1.25rem; margin: 0.2rem 0; }
+  .exp-formatted-desc ol { list-style-type: decimal; padding-left: 1.25rem; margin: 0.2rem 0; }
+  .exp-formatted-desc li { margin-bottom: 0.15rem; }
+  .exp-formatted-desc mark { background-color: #fef08a; color: #0f172a; padding: 0 3px; border-radius: 2px; }
   @media print { body { background: #fff; padding: 0; } .sheet { box-shadow: none; width: 100%; } }
 </style>
 </head>
@@ -1500,9 +1983,9 @@
   <div class="sheet">${printable.outerHTML.replace(/contenteditable="true"/g, '')}</div>
 </body>
 </html>`;
-            const blob = new Blob([standaloneHTML], { type: 'text/html;charset=utf-8' });
-            triggerFileDownload(blob, getSafeFileName('html'));
-        }
+        const blob = new Blob([standaloneHTML], { type: 'text/html;charset=utf-8' });
+        triggerFileDownload(blob, getSafeFileName('html'));
+    }
 
     function exportAsTXT() {
         toggleExportMenu();
@@ -1518,8 +2001,13 @@
         if (cvData.experiences && cvData.experiences.length) {
             lines.push('\nWORK EXPERIENCE');
             cvData.experiences.forEach(e => {
-                lines.push(`* ${e.title} - ${e.company} (${e.duration})`);
-                if (e.desc) lines.push(`  ${e.desc}`);
+                const durationDisplay = formatExperienceDurationDisplay(e);
+                const compInfo = [e.company, e.location].filter(Boolean).join(', ');
+                lines.push(`* ${e.title} - ${compInfo} (${durationDisplay})`);
+                if (e.desc) {
+                    const plainDesc = e.desc.replace(/<\/?(b|strong|i|em|mark|u)>/gi, '');
+                    lines.push(plainDesc.split('\n').map(l => '  ' + l).join('\n'));
+                }
             });
         }
         if (cvData.projects && cvData.projects.length) {
